@@ -11,9 +11,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.PAT }}  # Use PAT for checkout
+        token: ${{ secrets.PAT }}
 
-    - name: Create branch
+    - name: Create branch and link to issue
       run: |
         # Function to sanitize branch name
         sanitize_branch_name() {
@@ -42,7 +42,11 @@ jobs:
         git checkout -b "$BRANCH_NAME"
         git push origin "$BRANCH_NAME"
 
+        # Link the branch to the issue using GitHub CLI
+        gh issue edit $ISSUE_NUMBER --add-project "Branch:$BRANCH_NAME"
+
         # Comment on the issue with the new branch name
-        gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created for this issue."
+        gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created and linked to this issue."
       env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}  # Use PAT for GitHub CLI
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+        GH_TOKEN: ${{ secrets.PAT }}
