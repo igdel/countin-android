@@ -10,6 +10,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.PAT }}  # Use PAT for checkout
 
     - name: Create branch
       run: |
@@ -43,4 +45,4 @@ jobs:
         # Comment on the issue with the new branch name
         gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created for this issue."
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}  # Use PAT for GitHub CLI
