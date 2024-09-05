@@ -42,8 +42,12 @@ jobs:
         git checkout -b "$BRANCH_NAME"
         git push origin "$BRANCH_NAME"
 
-        # Link the branch to the issue using GitHub CLI
-        gh issue edit $ISSUE_NUMBER --add-project "Branch:$BRANCH_NAME"
+        # Link the branch to the issue using GitHub API
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.PAT }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/timeline \
+          -d '{"event":"cross-referenced","source":{"type":"issue","owner":"'${{ github.repository_owner }}'","repo":"'${{ github.event.repository.name }}'","issue_number":'$ISSUE_NUMBER',"commit_id":"'$(git rev-parse HEAD)'"}}'
 
         # Comment on the issue with the new branch name
         gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created and linked to this issue."
