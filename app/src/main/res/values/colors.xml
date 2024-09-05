@@ -1,10 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#0f9d58</color>
+
+    <color name="colorPrimaryDark">#0a7c40</color>
+
+    <color name="colorAccent">#F61067</color>
+
+    <color name="colorBackground">#e3f5ee</color>
+
+    <color name="colorOnBackground">#003333</color>
+
+    <color name="colorText">#576490</color>
+
+    <color name="colorTrack">#D3D3D3</color>
+
+    <color name="colorDarkModePrimary">#0f9d58</color>
+
+    <!-- Darker version of the primary color, for status bars and deeper elements -->
+    <color name="colorDarkModePrimaryDark">#0a7c40</color>
+
+    <!-- Accent color for elements that require emphasis -->
+    <color name="colorDarkModeAccent">#F61067</color>
+
+    <!-- Background color for most app surfaces -->
+    <color name="colorDarkModeBackground">#2c3e50</color> <!-- A dark blue/grey shade -->
+
+    <!-- Color for text and icons on top of the primary color -->
+    <color name="colorDarkModeOnBackground">#ffffff</color>
+
+    <!-- Text color that provides sufficient contrast on the primary background color -->
+    <color name="colorDarkModeText">#E0E0E0</color> <!-- Light grey for better visibility -->
+
+    <!-- Track color for sliders, progress bars, etc. -->
+    <color name="colorDarkModeTrack">#4D4D4D</color> <!-- Subdued grey -->
 </resources>
