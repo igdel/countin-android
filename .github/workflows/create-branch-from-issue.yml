@@ -1,0 +1,60 @@
+name: Create Custom Branch from Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.PAT }}
+
+    - name: Create branch and link to issue
+      run: |
+        # Function to sanitize branch name
+        sanitize_branch_name() {
+          echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//'
+        }
+
+        # Get issue details
+        ISSUE_NUMBER="${{ github.event.issue.number }}"
+        ISSUE_TITLE="${{ github.event.issue.title }}"
+        ISSUE_BODY="${{ github.event.issue.body }}"
+        
+        # Check for manual branch type override
+        if [[ "$ISSUE_BODY" == *"[branch-type:"* ]]; then
+          BRANCH_TYPE=$(echo "$ISSUE_BODY" | grep -oP '\[branch-type:\K[^\]]+')
+        else
+          BRANCH_TYPE="issue"
+        fi
+
+        # Create branch name
+        BRANCH_NAME="$BRANCH_TYPE/$(sanitize_branch_name "$ISSUE_TITLE")-$ISSUE_NUMBER"
+        
+        # Create and push the new branch
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git checkout -b "$BRANCH_NAME"
+        git push origin "$BRANCH_NAME"
+
+        # Link the branch to the issue using GitHub API
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.PAT }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/timeline \
+          -d '{"event":"cross-referenced","source":{"type":"issue","owner":"'${{ github.repository_owner }}'","repo":"'${{ github.event.repository.name }}'","issue_number":'$ISSUE_NUMBER',"commit_id":"'$(git rev-parse HEAD)'"}}'
+
+        # Comment on the issue with the new branch name and instructions
+        gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created and linked to this issue.
+
+        To change the branch type in the future, add a comment with [branch-type:newtype]. For example:
+        [branch-type:feature] or [branch-type:bugfix]
+
+        This will not rename the existing branch, but will be noted for reference."
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+        GH_TOKEN: ${{ secrets.PAT }}
