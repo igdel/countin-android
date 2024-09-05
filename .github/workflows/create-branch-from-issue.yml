@@ -1,0 +1,46 @@
+name: Create Custom Branch from Issue
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  create_branch:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create branch
+      run: |
+        # Function to sanitize branch name
+        sanitize_branch_name() {
+          echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//'
+        }
+
+        # Get issue details
+        ISSUE_NUMBER="${{ github.event.issue.number }}"
+        ISSUE_TITLE="${{ github.event.issue.title }}"
+        
+        # Determine branch prefix based on labels
+        if [[ "${{ contains(github.event.issue.labels.*.name, 'bug') }}" == "true" ]]; then
+          PREFIX="bugfix"
+        elif [[ "${{ contains(github.event.issue.labels.*.name, 'enhancement') }}" == "true" ]]; then
+          PREFIX="feature"
+        else
+          PREFIX="issue"
+        fi
+
+        # Create branch name
+        BRANCH_NAME="$PREFIX/$(sanitize_branch_name "$ISSUE_TITLE")-$ISSUE_NUMBER"
+        
+        # Create and push the new branch
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git checkout -b "$BRANCH_NAME"
+        git push origin "$BRANCH_NAME"
+
+        # Comment on the issue with the new branch name
+        gh issue comment "$ISSUE_NUMBER" --body "Branch [$BRANCH_NAME](https://github.com/${{ github.repository }}/tree/$BRANCH_NAME) has been created for this issue."
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
