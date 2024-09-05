@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">CountIn</string>
+    <string name="onboarding_onboarding1_title">Welcome to CountIn!</string>
+    <string name="onboarding_onboarding1_description">Our app is crafted to help you effectively manage the number of visitors in your space. It doesn’t matter if it’s a restaurant, big event or football match, we got you covered ^^</string>
+    <string name="onboarding_onboarding2_title">At the same time!</string>
+    <string name="onboarding_onboarding2_description">We handle multiple entries and exits, ensuring that you adhere to maximum occupancy limits. With real-time updates, you’ll know immediately when your space reaches capacity.</string>
+    <string name="onboarding_onboarding3_title">Let’s get CountIn!</string>
+    <string name="onboarding_onboarding3_description">Best of all, CountIn is completely free for end users. Get started now and keep your environment safe and compliant!</string>
+    <string name="onboarding_button_previous">Previous</string>
+    <string name="onboarding_button_next">Next</string>
+    <string name="onboarding_button_finish">Finish</string>
+
+    <string name="create_room_hint_name">Space Name</string>
+    <string name="create_room_hint_current_occupancy">Current</string>
+    <string name="create_room_hint_max_occupancy">Max</string>
+    <string name="create_room_button_start_space">Start Space</string>
+    <string name="create_room_text_title">Create a new Space</string>
+    <string name="create_room_text_title_last_spaces">Last Spaces</string>
+
+    <string name="room_text_hint">(Hint: swipe on circle or use volume buttons to control the occupancy)</string>
+    <string name="room_text_current">Current:</string>
+    <string name="room_text_max">Max:</string>
+
+    <string name="bottomsheet_share_public_url">Share Public URL</string>
+    <string name="bottomsheet_share_staff_url">Share Staff URL</string>
+    <string name="bottomsheet_share_public_qr">Share Public QR</string>
+    <string name="bottomsheet_share_staff_qr">Share Staff QR</string>
+
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_button_positive">OK</string>
 </resources>

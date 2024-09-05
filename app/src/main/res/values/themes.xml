@@ -1,5 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.CountIn" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.CountIn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowSplashScreenBackground">@color/colorBackground</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.CountIn.AfterSplash</item>
+    </style>
+
+    <style name="Theme.CountIn.AfterSplash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:fontFamily">@style/TextAppearance.CountIn.FontFamily</item>
+    </style>
+
+    <style name="TextAppearance.CountIn.FontFamily" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="TextAppearance.CountIn.FontFamily.Bold" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="Widget.CountIn.Button.FontFamily" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="Theme.CountIn.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/colorText</item>
+    </style>
 </resources>

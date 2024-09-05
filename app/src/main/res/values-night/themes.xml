@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <style name="Theme.CountIn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorDarkModePrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkModePrimaryDark</item>
+        <item name="colorAccent">@color/colorDarkModeAccent</item>
+        <item name="android:colorBackground">@color/colorDarkModeBackground</item>
+        <item name="android:textColor">@color/colorDarkModeText</item>
+        <item name="windowSplashScreenBackground">@color/colorDarkModeBackground</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.CountIn.AfterSplash.DarkMode</item>
+    </style>
+
+    <style name="Theme.CountIn.AfterSplash.DarkMode" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorDarkModePrimary</item>
+        <item name="colorPrimaryDark">@color/colorDarkModePrimaryDark</item>
+        <item name="colorAccent">@color/colorDarkModeAccent</item>
+        <item name="android:colorBackground">@color/colorDarkModeBackground</item>
+        <item name="android:textColor">@color/colorDarkModeText</item>
+        <item name="android:fontFamily">@style/TextAppearance.CountIn.FontFamily</item>
+    </style>
+
+    <style name="TextAppearance.CountIn.FontFamily" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/colorDarkModeText</item>
+    </style>
+
+    <style name="TextAppearance.CountIn.FontFamily.Bold" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/colorDarkModeText</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="Widget.CountIn.Button.FontFamily" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="Theme.CountIn.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/colorDarkModeText</item>
+    </style>
+</resources>
